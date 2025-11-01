@@ -70,6 +70,15 @@
       font-weight: 600;
     }
 
+    .past {
+      background: #fee2e2 !important;
+      border-color: #ef4444 !important;
+    }
+
+    .past .subject {
+      color: #b91c1c !important;
+    }
+
     .empty {
       background: transparent;
       border: none;
@@ -85,7 +94,7 @@
 <body>
   <h1>📅 November 2025 Exam Calendar</h1>
 
-  <div class="calendar">
+  <div class="calendar" id="calendar">
     <!-- Weekday Names -->
     <div class="day-name">Sun</div>
     <div class="day-name">Mon</div>
@@ -103,7 +112,7 @@
     <div class="empty"></div>
     <div class="empty"></div>
 
-    <!-- November Dates -->
+    <!-- Dates of November -->
     <div class="date-box">1</div>
     <div class="date-box">2</div>
     <div class="date-box">3</div>
@@ -115,36 +124,36 @@
     <div class="date-box">9</div>
     <div class="date-box">10</div>
     <div class="date-box">11</div>
-    <div class="date-box exam">
+    <div class="date-box exam" data-day="12" data-subject="Maths">
       12
       <div class="subject">Maths</div>
     </div>
     <div class="date-box">13</div>
     <div class="date-box">14</div>
-    <div class="date-box exam">
+    <div class="date-box exam" data-day="15" data-subject="TOC">
       15
       <div class="subject">TOC</div>
     </div>
     <div class="date-box">16</div>
     <div class="date-box">17</div>
-    <div class="date-box exam">
+    <div class="date-box exam" data-day="18" data-subject="DSA">
       18
       <div class="subject">DSA</div>
     </div>
     <div class="date-box">19</div>
     <div class="date-box">20</div>
-    <div class="date-box exam">
+    <div class="date-box exam" data-day="21" data-subject="Java">
       21
       <div class="subject">Java</div>
     </div>
     <div class="date-box">22</div>
     <div class="date-box">23</div>
-    <div class="date-box exam">
+    <div class="date-box exam" data-day="24" data-subject="DEL">
       24
       <div class="subject">DEL</div>
     </div>
     <div class="date-box">25</div>
-    <div class="date-box exam">
+    <div class="date-box exam" data-day="26" data-subject="Ethics">
       26
       <div class="subject">Ethics</div>
     </div>
@@ -155,5 +164,24 @@
   </div>
 
   <footer>Made by Dion Thomas Suby ❤️</footer>
+
+  <script>
+    // Current date
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth(); // 0 = Jan, so 10 = November
+
+    // Only apply if we're in November 2025 or later
+    if (currentYear >= 2025 && currentMonth >= 10) {
+      const boxes = document.querySelectorAll(".exam");
+      boxes.forEach((box) => {
+        const examDay = parseInt(box.dataset.day);
+        const examDate = new Date(2025, 10, examDay); // November = 10
+        if (today > examDate) {
+          box.classList.add("past");
+        }
+      });
+    }
+  </script>
 </body>
 </html>
