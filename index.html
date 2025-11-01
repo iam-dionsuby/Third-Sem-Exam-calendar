@@ -5,21 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>November 2025 Exam Calendar</title>
   <style>
+    :root {
+      --bg: #f4f6fa;
+      --text: #333;
+      --card-bg: #fff;
+      --header-bg: linear-gradient(90deg, #007bff, #0056b3);
+      --today-bg: #66b3ff;
+      --past-bg: #ffc9c9;
+      --exam-bg: #fff3cd;
+    }
+
+    body.dark {
+      --bg: #1c1c1c;
+      --text: #e4e4e4;
+      --card-bg: #2c2c2c;
+      --header-bg: linear-gradient(90deg, #222, #444);
+      --today-bg: #004085;
+      --past-bg: #662222;
+      --exam-bg: #4d4d00;
+    }
+
     body {
       font-family: "Segoe UI", sans-serif;
-      background: #f4f6fa;
-      color: #333;
+      background: var(--bg);
+      color: var(--text);
       text-align: center;
       margin: 0;
       padding: 0;
+      transition: background 0.3s, color 0.3s;
     }
 
     h1 {
-      background: linear-gradient(90deg, #007bff, #0056b3);
+      background: var(--header-bg);
       color: white;
       padding: 16px 0;
       margin: 0 0 20px 0;
       font-size: 1.5rem;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      background: var(--card-bg);
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background: #007bff;
+      color: white;
+      border-color: #007bff;
     }
 
     .calendar {
@@ -32,11 +72,12 @@
     }
 
     .day, .date {
-      background: white;
+      background: var(--card-bg);
       padding: 12px;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       font-size: 0.9rem;
+      transition: background 0.3s, color 0.3s;
     }
 
     .day {
@@ -46,23 +87,22 @@
     }
 
     .exam {
-      background: #fff3cd;
+      background: var(--exam-bg);
       font-weight: bold;
     }
 
     .past {
-      background: #ffc9c9 !important;
-      color: #800000;
+      background: var(--past-bg) !important;
+      color: #fff;
     }
 
     .today {
-      background: #66b3ff !important;
+      background: var(--today-bg) !important;
       color: white;
       font-weight: bold;
       border: 2px solid #004085;
     }
 
-    /* 🧩 Responsive for mobile */
     @media (max-width: 600px) {
       .calendar {
         gap: 4px;
@@ -78,9 +118,6 @@
     }
 
     @media (max-width: 400px) {
-      .calendar {
-        grid-template-columns: repeat(7, 1fr);
-      }
       .day, .date {
         padding: 8px 3px;
         font-size: 0.65rem;
@@ -89,6 +126,7 @@
   </style>
 </head>
 <body>
+  <button class="toggle-btn" id="toggle">🌙 Dark Mode</button>
   <h1>November 2025 Exam Calendar</h1>
   <div class="calendar" id="calendar"></div>
 
@@ -118,8 +156,10 @@
     const firstDay = new Date(year, month, 1).getDay();
     const totalDays = new Date(year, month + 1, 0).getDate();
     const today = new Date();
+    const todayMidnight = new Date();
+    todayMidnight.setHours(0, 0, 0, 0);
 
-    // Fill in blanks before 1st
+    // Fill in blanks
     for (let i = 0; i < firstDay; i++) {
       const div = document.createElement("div");
       calendar.appendChild(div);
@@ -138,8 +178,6 @@
       }
 
       const dateObj = new Date(year, month, d);
-      const todayMidnight = new Date();
-      todayMidnight.setHours(0, 0, 0, 0);
 
       if (
         today.getFullYear() === year &&
@@ -153,6 +191,15 @@
 
       calendar.appendChild(div);
     }
+
+    // 🌙 Dark mode toggle
+    const toggle = document.getElementById("toggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark")
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+    });
   </script>
 </body>
 </html>
