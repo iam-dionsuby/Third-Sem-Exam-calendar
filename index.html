@@ -13,6 +13,7 @@
       --today-bg: #66b3ff;
       --past-bg: #ffc9c9;
       --exam-bg: #fff3cd;
+      --footer-bg: #eaeaea;
     }
 
     body.dark {
@@ -23,6 +24,7 @@
       --today-bg: #004085;
       --past-bg: #662222;
       --exam-bg: #4d4d00;
+      --footer-bg: #111;
     }
 
     body {
@@ -103,6 +105,20 @@
       border: 2px solid #004085;
     }
 
+    footer {
+      background: var(--footer-bg);
+      color: var(--text);
+      padding: 12px 0;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    footer span {
+      font-weight: bold;
+      color: #007bff;
+    }
+
     @media (max-width: 600px) {
       .calendar {
         gap: 4px;
@@ -129,6 +145,10 @@
   <button class="toggle-btn" id="toggle">🌙 Dark Mode</button>
   <h1>November 2025 Exam Calendar</h1>
   <div class="calendar" id="calendar"></div>
+
+  <footer>
+    Made with ❤️ by <span>Dion Thomas Suby</span>
+  </footer>
 
   <script>
     const exams = {
