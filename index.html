@@ -6,181 +6,126 @@
   <title>November 2025 Exam Calendar</title>
   <style>
     body {
-      font-family: "Poppins", sans-serif;
-      background: #f4f7fb;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      text-align: center;
       margin: 0;
-      padding: 20px;
+      padding: 0;
     }
 
     h1 {
-      color: #1e3a8a;
-      font-size: 2rem;
-      margin-bottom: 20px;
-      text-align: center;
+      background: #007bff;
+      color: white;
+      padding: 15px 0;
+      margin: 0 0 20px 0;
     }
 
     .calendar {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 10px;
+      width: 90%;
       max-width: 700px;
-      width: 100%;
+      margin: 0 auto;
+    }
+
+    .day, .date {
       background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
 
-    .day-name {
-      text-align: center;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .date-box {
-      height: 90px;
-      background: #f9fafb;
-      border-radius: 10px;
-      text-align: center;
-      padding-top: 8px;
-      transition: 0.3s;
-      position: relative;
-      border: 1px solid #e5e7eb;
-    }
-
-    .date-box:hover {
-      transform: scale(1.05);
-      background: #e0e7ff;
+    .day {
+      font-weight: bold;
+      background: #007bff;
+      color: white;
     }
 
     .exam {
-      background: #dbeafe;
-      border: 2px solid #3b82f6;
-    }
-
-    .exam .subject {
-      font-size: 0.75rem;
-      color: #1e40af;
-      margin-top: 5px;
-      font-weight: 600;
+      background: #ffeeba;
+      font-weight: bold;
     }
 
     .past {
-      background: #fee2e2 !important;
-      border-color: #ef4444 !important;
+      background: #ffb3b3 !important;
+      color: #800000;
     }
 
-    .past .subject {
-      color: #b91c1c !important;
-    }
-
-    .empty {
-      background: transparent;
-      border: none;
-    }
-
-    footer {
-      margin-top: 30px;
-      color: #555;
-      font-size: 0.9rem;
+    .today {
+      background: #66b3ff !important;
+      color: white;
+      font-weight: bold;
+      border: 2px solid #004085;
     }
   </style>
 </head>
 <body>
-  <h1>📅 November 2025 Exam Calendar</h1>
-
-  <div class="calendar" id="calendar">
-    <!-- Weekday Names -->
-    <div class="day-name">Sun</div>
-    <div class="day-name">Mon</div>
-    <div class="day-name">Tue</div>
-    <div class="day-name">Wed</div>
-    <div class="day-name">Thu</div>
-    <div class="day-name">Fri</div>
-    <div class="day-name">Sat</div>
-
-    <!-- Empty slots before Nov 1 (Saturday) -->
-    <div class="empty"></div>
-    <div class="empty"></div>
-    <div class="empty"></div>
-    <div class="empty"></div>
-    <div class="empty"></div>
-    <div class="empty"></div>
-
-    <!-- Dates of November -->
-    <div class="date-box">1</div>
-    <div class="date-box">2</div>
-    <div class="date-box">3</div>
-    <div class="date-box">4</div>
-    <div class="date-box">5</div>
-    <div class="date-box">6</div>
-    <div class="date-box">7</div>
-    <div class="date-box">8</div>
-    <div class="date-box">9</div>
-    <div class="date-box">10</div>
-    <div class="date-box">11</div>
-    <div class="date-box exam" data-day="12" data-subject="Maths">
-      12
-      <div class="subject">Maths</div>
-    </div>
-    <div class="date-box">13</div>
-    <div class="date-box">14</div>
-    <div class="date-box exam" data-day="15" data-subject="TOC">
-      15
-      <div class="subject">TOC</div>
-    </div>
-    <div class="date-box">16</div>
-    <div class="date-box">17</div>
-    <div class="date-box exam" data-day="18" data-subject="DSA">
-      18
-      <div class="subject">DSA</div>
-    </div>
-    <div class="date-box">19</div>
-    <div class="date-box">20</div>
-    <div class="date-box exam" data-day="21" data-subject="Java">
-      21
-      <div class="subject">Java</div>
-    </div>
-    <div class="date-box">22</div>
-    <div class="date-box">23</div>
-    <div class="date-box exam" data-day="24" data-subject="DEL">
-      24
-      <div class="subject">DEL</div>
-    </div>
-    <div class="date-box">25</div>
-    <div class="date-box exam" data-day="26" data-subject="Ethics">
-      26
-      <div class="subject">Ethics</div>
-    </div>
-    <div class="date-box">27</div>
-    <div class="date-box">28</div>
-    <div class="date-box">29</div>
-    <div class="date-box">30</div>
-  </div>
-
-  <footer>Made by Dion Thomas Suby ❤️</footer>
+  <h1>November 2025 Exam Calendar</h1>
+  <div class="calendar" id="calendar"></div>
 
   <script>
-    // Current date
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth(); // 0 = Jan, so 10 = November
+    const exams = {
+      12: "Maths",
+      15: "TOC",
+      18: "DSA",
+      21: "Java",
+      24: "DEL",
+      26: "Ethics"
+    };
 
-    // Only apply if we're in November 2025 or later
-    if (currentYear >= 2025 && currentMonth >= 10) {
-      const boxes = document.querySelectorAll(".exam");
-      boxes.forEach((box) => {
-        const examDay = parseInt(box.dataset.day);
-        const examDate = new Date(2025, 10, examDay); // November = 10
-        if (today > examDate) {
-          box.classList.add("past");
-        }
-      });
+    const calendar = document.getElementById("calendar");
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    // Add day headers
+    days.forEach(day => {
+      const div = document.createElement("div");
+      div.className = "day";
+      div.textContent = day;
+      calendar.appendChild(div);
+    });
+
+    const year = 2025;
+    const month = 10; // November (0-indexed)
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    const today = new Date();
+
+    // Fill in blanks before the 1st
+    for (let i = 0; i < firstDay; i++) {
+      const div = document.createElement("div");
+      calendar.appendChild(div);
+    }
+
+    // Add each date
+    for (let d = 1; d <= totalDays; d++) {
+      const div = document.createElement("div");
+      div.className = "date";
+
+      if (exams[d]) {
+        div.classList.add("exam");
+        div.textContent = `${d} - ${exams[d]}`;
+      } else {
+        div.textContent = d;
+      }
+
+      // Highlight today
+      if (
+        today.getFullYear() === year &&
+        today.getMonth() === month &&
+        today.getDate() === d
+      ) {
+        div.classList.add("today");
+      }
+
+      // Mark past days red
+      const dateObj = new Date(year, month, d);
+      if (dateObj < today.setHours(0,0,0,0)) {
+        div.classList.add("past");
+      }
+
+      calendar.appendChild(div);
     }
   </script>
 </body>
