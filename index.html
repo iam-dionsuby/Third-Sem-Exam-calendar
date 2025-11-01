@@ -27,38 +27,35 @@
       --footer-bg: #111;
     }
 
-    html, body {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      margin: 0;
+    body {
+      font-family: "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
-      font-family: "Segoe UI", sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
       transition: background 0.3s, color 0.3s;
     }
 
     h1 {
       background: var(--header-bg);
       color: white;
-      padding: 12px 0;
-      margin: 0 0 10px 0;
-      font-size: 1.4rem;
-      text-align: center;
+      padding: 16px 0;
+      margin: 0 0 20px 0;
+      font-size: 1.5rem;
     }
 
     .toggle-btn {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      top: 12px;
+      right: 12px;
       background: var(--card-bg);
       border: 1px solid #ccc;
       border-radius: 20px;
-      padding: 6px 12px;
+      padding: 8px 14px;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       transition: 0.3s;
-      z-index: 10;
     }
 
     .toggle-btn:hover {
@@ -70,22 +67,19 @@
     .calendar {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
+      gap: 6px;
       width: 95%;
       max-width: 700px;
       margin: 0 auto 20px;
-      flex-grow: 1;
     }
 
     .day, .date {
       background: var(--card-bg);
-      padding: 10px;
-      border-radius: 6px;
+      padding: 12px;
+      border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      font-size: 0.85rem;
-      text-align: center;
+      font-size: 0.9rem;
       transition: background 0.3s, color 0.3s;
-      word-wrap: break-word;
     }
 
     .day {
@@ -114,11 +108,9 @@
     footer {
       background: var(--footer-bg);
       color: var(--text);
-      padding: 10px 0;
+      padding: 12px 0;
       font-size: 0.9rem;
       border-top: 1px solid rgba(0,0,0,0.1);
-      text-align: center;
-      margin-top: auto;
       transition: background 0.3s, color 0.3s;
     }
 
@@ -127,29 +119,24 @@
       color: #007bff;
     }
 
-    /* 📱 Smaller layout for phones */
     @media (max-width: 600px) {
       .calendar {
-        gap: 3px;
+        gap: 4px;
       }
       .day, .date {
-        padding: 6px 3px;
-        font-size: 0.65rem;
+        padding: 10px 4px;
+        font-size: 0.7rem;
       }
       h1 {
-        font-size: 1.1rem;
-        padding: 10px 0;
-      }
-      .toggle-btn {
-        font-size: 0.75rem;
-        padding: 5px 10px;
+        font-size: 1.2rem;
+        padding: 12px 0;
       }
     }
 
     @media (max-width: 400px) {
       .day, .date {
-        padding: 4px 2px;
-        font-size: 0.6rem;
+        padding: 8px 3px;
+        font-size: 0.65rem;
       }
     }
   </style>
@@ -164,10 +151,19 @@
   </footer>
 
   <script>
-    const exams = { 12: "Maths", 15: "TOC", 18: "DSA", 21: "Java", 24: "DEL", 26: "Ethics" };
+    const exams = {
+      12: "Maths",
+      15: "TOC",
+      18: "DSA",
+      21: "Java",
+      24: "DEL",
+      26: "Ethics"
+    };
+
     const calendar = document.getElementById("calendar");
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+    // Add day headers
     days.forEach(day => {
       const div = document.createElement("div");
       div.className = "day";
@@ -183,11 +179,13 @@
     const todayMidnight = new Date();
     todayMidnight.setHours(0, 0, 0, 0);
 
+    // Fill in blanks
     for (let i = 0; i < firstDay; i++) {
       const div = document.createElement("div");
       calendar.appendChild(div);
     }
 
+    // Add all days
     for (let d = 1; d <= totalDays; d++) {
       const div = document.createElement("div");
       div.className = "date";
@@ -200,7 +198,12 @@
       }
 
       const dateObj = new Date(year, month, d);
-      if (today.getFullYear() === year && today.getMonth() === month && today.getDate() === d) {
+
+      if (
+        today.getFullYear() === year &&
+        today.getMonth() === month &&
+        today.getDate() === d
+      ) {
         div.classList.add("today");
       } else if (dateObj < todayMidnight) {
         div.classList.add("past");
@@ -209,6 +212,7 @@
       calendar.appendChild(div);
     }
 
+    // 🌙 Dark mode toggle
     const toggle = document.getElementById("toggle");
     toggle.addEventListener("click", () => {
       document.body.classList.toggle("dark");
