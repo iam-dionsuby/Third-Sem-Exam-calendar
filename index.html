@@ -18,51 +18,67 @@
     }
 
     h1 {
-      color: #1e40af;
+      color: #1e3a8a;
       font-size: 2rem;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       text-align: center;
     }
 
     .calendar {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      max-width: 700px;
       width: 100%;
-      max-width: 900px;
-    }
-
-    .exam-card {
       background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .day-name {
       text-align: center;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .date-box {
+      height: 90px;
+      background: #f9fafb;
+      border-radius: 10px;
+      text-align: center;
+      padding-top: 8px;
       transition: 0.3s;
-      border: 1px solid #e0e0e0;
+      position: relative;
+      border: 1px solid #e5e7eb;
     }
 
-    .exam-card:hover {
+    .date-box:hover {
       transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background: #e0e7ff;
     }
 
-    .subject {
-      font-size: 1.2rem;
-      color: #111827;
+    .exam {
+      background: #dbeafe;
+      border: 2px solid #3b82f6;
+    }
+
+    .exam .subject {
+      font-size: 0.75rem;
+      color: #1e40af;
+      margin-top: 5px;
       font-weight: 600;
     }
 
-    .date {
-      color: #6b7280;
-      font-size: 1rem;
-      margin-top: 8px;
+    .empty {
+      background: transparent;
+      border: none;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
+      margin-top: 30px;
       color: #555;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -70,30 +86,72 @@
   <h1>📅 November 2025 Exam Calendar</h1>
 
   <div class="calendar">
-    <div class="exam-card">
-      <div class="subject">Mathematics</div>
-      <div class="date">November 12</div>
+    <!-- Weekday Names -->
+    <div class="day-name">Sun</div>
+    <div class="day-name">Mon</div>
+    <div class="day-name">Tue</div>
+    <div class="day-name">Wed</div>
+    <div class="day-name">Thu</div>
+    <div class="day-name">Fri</div>
+    <div class="day-name">Sat</div>
+
+    <!-- Empty slots before Nov 1 (Saturday) -->
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+
+    <!-- November Dates -->
+    <div class="date-box">1</div>
+    <div class="date-box">2</div>
+    <div class="date-box">3</div>
+    <div class="date-box">4</div>
+    <div class="date-box">5</div>
+    <div class="date-box">6</div>
+    <div class="date-box">7</div>
+    <div class="date-box">8</div>
+    <div class="date-box">9</div>
+    <div class="date-box">10</div>
+    <div class="date-box">11</div>
+    <div class="date-box exam">
+      12
+      <div class="subject">Maths</div>
     </div>
-    <div class="exam-card">
-      <div class="subject">Theory of Computation (TOC)</div>
-      <div class="date">November 15</div>
+    <div class="date-box">13</div>
+    <div class="date-box">14</div>
+    <div class="date-box exam">
+      15
+      <div class="subject">TOC</div>
     </div>
-    <div class="exam-card">
-      <div class="subject">Data Structures and Algorithms (DSA)</div>
-      <div class="date">November 18</div>
+    <div class="date-box">16</div>
+    <div class="date-box">17</div>
+    <div class="date-box exam">
+      18
+      <div class="subject">DSA</div>
     </div>
-    <div class="exam-card">
+    <div class="date-box">19</div>
+    <div class="date-box">20</div>
+    <div class="date-box exam">
+      21
       <div class="subject">Java</div>
-      <div class="date">November 21</div>
     </div>
-    <div class="exam-card">
-      <div class="subject">Digital Electronics (DEL)</div>
-      <div class="date">November 24</div>
+    <div class="date-box">22</div>
+    <div class="date-box">23</div>
+    <div class="date-box exam">
+      24
+      <div class="subject">DEL</div>
     </div>
-    <div class="exam-card">
+    <div class="date-box">25</div>
+    <div class="date-box exam">
+      26
       <div class="subject">Ethics</div>
-      <div class="date">November 26</div>
     </div>
+    <div class="date-box">27</div>
+    <div class="date-box">28</div>
+    <div class="date-box">29</div>
+    <div class="date-box">30</div>
   </div>
 
   <footer>Made by Dion Thomas Suby ❤️</footer>
